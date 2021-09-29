@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+<style>
+ .gallery-block{
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+
+.gallery-block .heading{
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.gallery-block .heading h2{
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+
+.gallery-block.compact-gallery .item{
+  overflow: hidden;
+  margin-bottom: 0;
+  background: black;
+  opacity: 1;
+}
+
+.gallery-block.compact-gallery .item .image{
+  transition: 0.8s ease;
+}
+
+.gallery-block.compact-gallery .item .info{
+  position: relative;
+    display: inline-block;
+}
+
+.gallery-block.compact-gallery .item .description{
+  display: grid;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px;
+    font-size: 17px;
+    line-height: 18px;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    opacity: 1;
+    color: #fff;
+    transition: 0.8s ease;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.39));
+}
+
+.gallery-block.compact-gallery .item .description .description-heading{
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.gallery-block.compact-gallery .item .description .description-body{
+  font-size: 0.8em;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+@@media (min-width: 576px) {
+
+  .gallery-block.compact-gallery .item .description {
+    opacity: 0;
+  }
+
+  .gallery-block.compact-gallery .item a:hover .description {
+    opacity: 1;
+  }
+
+  .gallery-block .zoom-on-hover:hover .image {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compact Gallery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+    <link rel="stylesheet" href="compact-gallery.css">
+</head>
+<body>
+    <section class="gallery-block compact-gallery">
+        <div class="container">
+            <div class="heading">
+                <h2>Gallery</h2>
+            </div>
+            <div class="row no-gutters">
+                @{
+                    int x = 1600;
+                    int y = 900;
+                    string[] names = { "petra", "aqaba", "Amman", "Wadirum", "jarash", "Ajloun", "karak" };
+                    for (int i = 0; i < 50; i++)
+                    {
+
+
+                        x = x - 1;
+                        y = y - 1;
+                        string Url = "https://source.unsplash.com/" + @x-- + "x" + @y-- + "/?Jordan," + @names[names.Length - 1];
+
+                        <div class="col-md-6 col-lg-4 item zoom-on-hover">
+                            <a class="lightbox">
+                                <img class="img-fluid image" src="@Url">
+                                <span class="description">
+                                    <span class="description-heading">&copy; Jordan Toursim</span>
+                                </span>
+                            </a>
+                        </div>
+
+
+                    }
+                }
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6be3f5e97d6247ceb3b04e58054cb0e5" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="JordanToursimModel.City" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JordanToursimModel.Department" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="JordanToursimModel.LogIn" Width="1.5" PointX="5.75" PointY="1.625" />
+        <EntityTypeShape EntityType="JordanToursimModel.Order" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="JordanToursimModel.Partner" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="JordanToursimModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.625" />
+        <EntityTypeShape EntityType="JordanToursimModel.Trip" Width="1.5" PointX="0.75" PointY="3.5" />
+        <AssociationConnector Association="JordanToursimModel.FK_Department_Cities" />
+        <AssociationConnector Association="JordanToursimModel.FK_Department_Trip" />
+        <AssociationConnector Association="JordanToursimModel.FK_Order_Trip" />
+        <AssociationConnector Association="JordanToursimModel.FK_Partners_Order" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

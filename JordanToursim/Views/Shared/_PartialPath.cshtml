@@ -1,0 +1,19 @@
+﻿@{
+    if (Session["adminName"] != null)
+    {
+        <li class="nav-item active">
+            <a href="/Trips/All" class="nav-link">Current Trips</a>
+        </li>
+        <li class="nav-item">
+            <a href="/Trips" class="nav-link">Main</a>
+        </li>
+        <li class="nav-item">
+            <a href="/Trips/Requests" class="nav-link">Requests</a>
+        </li>
+        <li class="nav-item">
+            <a href="/Trips/Login" class="nav-link">Logout</a>
+        </li>
+
+    }
+    
+}

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<JordanToursim.Models.Partner>
+@{
+    ViewBag.Title = "Print";
+    Layout = "";
+}
+
+<style>
+    * {
+        border-radius: 50px;
+    }
+
+    i {
+        font-size: 2rem
+    }
+
+    .navbar .navbar-inverse .navbar-fixed-top {
+        display: none;
+    }
+
+    .navbar  {
+        border-radius:0;
+    }
+
+</style>
+
+
+<div style="height:50px">&nbsp;</div>
+
+<div class="col-md-12" style="">
+    <div class="card bg-danger text-white text-center" style="color: #fff !important; text-align: center; background-color: #343a40 !important; ">
+        <div class="card-body">
+
+            <br />
+            <i class="fas fa-credit-card fa-3x text-muted"></i>
+            <h3>Details</h3>
+
+            @{
+                bool IsEnd = false;
+                int EsortsNumber = Model.Count();
+                int EsortsNumberAge = Model.Where(x => DateTime.Now.Year - x.PartnerBirthDay.Year > 16).Count();
+
+                while (IsEnd == false)
+                {
+                    //show details
+                    var i = 0;
+                    <p>Trip Number:  @ViewBag.TripDetails[i++]</p>
+                    <p>Order Number:  @ViewBag.TripDetails[i++]</p>
+                    <p>Trip Name:  @ViewBag.TripDetails[i++]</p>
+                    <p>Person Name: @ViewBag.TripDetails[i++]</p>
+                    if (EsortsNumber > 0)
+                    {
+                        double PartnersNumber = EsortsNumberAge * ViewBag.TripDetails[i++] + ViewBag.TripDetails[4];<p>Price: @PartnersNumber$</p>}
+                    else
+                    { <p> Price: @ViewBag.TripDetails[i++]$ </p> }
+                <p> Trip Date: @ViewBag.TripDetails[i++] </p>
+                //end show details
+                <p>
+                    Order state: @if (@ViewBag.TripDetails[6] == true)
+                    {<span style="color:lawngreen"> Accepted </span>
+                    <p>Please check your Email for more Information</p>}
+                else if (@ViewBag.TripDetails[6] == false)
+                {<span style="color:crimson"> Not Accepted </span> <p>Please check your Email for more Information</p>}
+                else
+                {<span style="color:yellow">Under review</span>}</p>
+
+                    <hr />
+
+                    //Show escorts for this traveler
+                    if (EsortsNumber > 0)
+                    { <i class="fas fa-users"></i>
+                        <p> @ViewBag.TripDetails[3] Escorts : </p>
+                        foreach (var item in Model)
+                        {
+                            <p>@item.PartnerName</p>
+                        }
+                    }
+                    //end of show escorts
+
+                    //show when alone travler
+                    else
+                    {<i class="fas fa-user"></i> <p style="font-size:1.5rem">Individual</p> }
+                    <br />
+                    //end of alone traveler
+
+                    //out while
+                    IsEnd = true;
+                }
+                if (@ViewBag.TripDetails[6] == true)
+                {
+                    var cool = Session["cool"];
+                    <a id="ExportPdfBut" href="/Home/PrintTicket/@cool" class="btn btn-primary btn-large" onclick="hide()">Download Ticket</a>
+                }
+            }
+
+
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function hide() {
+            document.getElementById("ExportPdfBut").style.display = "None";
+            $("footer").remove();
+        }
+    </script>
+
+}
+
+
+

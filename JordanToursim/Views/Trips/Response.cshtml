@@ -1,0 +1,107 @@
+﻿@model JordanToursim.Models.Order
+
+@{
+    ViewBag.Title = "Response";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    input, select, textarea {
+        border-radius: 25px !important;
+        width: 200px display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    }
+</style>
+
+<h2>Response</h2>
+@if (ViewBag.msg != null) {<div id="sendNote" class="alert alert-success">@ViewBag.msg <i class="glyphicon glyphicon-ok"></i> </div> }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.TripId)
+
+
+    @Html.HiddenFor(model => model.Participant_ID)
+
+
+        @Html.HiddenFor(model => model.TripId)
+
+
+
+        @Html.HiddenFor(model => model.Participant_ID)
+
+
+
+        @Html.HiddenFor(model => model.ParticipantName)
+
+
+        @Html.HiddenFor(model => model.Participant_National_ID)
+
+        @Html.HiddenFor(model => model.Participant_Birthdate)
+
+        @Html.HiddenFor(model => model.Participant_Email)
+
+        @Html.HiddenFor(model => model.NumberList)
+
+        @Html.HiddenFor(model => model.Participant_Phone_No)
+
+        @Html.HiddenFor(model => model.Participant_Image_IDcard)
+
+        @Html.HiddenFor(model => model.Order_Date)
+
+        @Html.HiddenFor(model => model.Movement_way)
+
+        @Html.HiddenFor(model => model.City)
+
+        @Html.HiddenFor(model => model.isPartner)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Order_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Order_Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Order_Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+        @Html.HiddenFor(model => model.agreement)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button style="border-radius:50%; margin-top:20px" type="submit" value="Save" class="btn btn-success  btn-lg" ><i class="glyphicon glyphicon-send"></i></button>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    document.getElementById("sendNote")
+</script>

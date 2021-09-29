@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JordanToursimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cityImage" Type="nvarchar(max)" />
+    <Property Name="IsPublish" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="departmentName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DepartmentImage" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="LogIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Admin" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Participant_ID" />
+    </Key>
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="Participant_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParticipantName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Participant_National_ID" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Participant_Birthdate" Type="date" Nullable="false" />
+    <Property Name="Participant_Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumberList" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Participant_Phone_No" Type="nvarchar" MaxLength="7" Nullable="false" />
+    <Property Name="Participant_Image_IDcard" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Order_Date" Type="date" Nullable="false" />
+    <Property Name="Movement_way" Type="bit" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="40" />
+    <Property Name="isPartner" Type="bit" Nullable="false" />
+    <Property Name="Order_Status" Type="bit" />
+    <Property Name="agreement" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Partners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Participant_ID" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartnerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PartnerNationalNumber" Type="int" Nullable="false" />
+    <Property Name="PartnerBirthDay" Type="date" Nullable="false" />
+    <Property Name="PartnerIdentityImg" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Trip">
+    <Key>
+      <PropertyRef Name="TripId" />
+    </Key>
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="Trip_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Trip_Description" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Trip_Date_Time_From" Type="date" Nullable="false" />
+    <Property Name="Trip_Date_Time_To" Type="date" Nullable="false" />
+    <Property Name="Trip_Capacity" Type="int" Nullable="false" />
+    <Property Name="City_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Department_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ticket_Price" Type="float" Nullable="false" />
+    <Property Name="Trip_Image_web" Type="nvarchar" MaxLength="50" />
+    <Property Name="Trip_Image_phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="BusMovement" Type="bit" Nullable="false" />
+    <Property Name="Lunch" Type="bit" Nullable="false" />
+    <Property Name="OvernightStay" Type="bit" Nullable="false" />
+    <Property Name="TouristGuide" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Department_Cities">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_Trip">
+    <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Trip">
+    <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partners_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Partners" Type="Self.Partners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Participant_ID" />
+      </Principal>
+      <Dependent Role="Partners">
+        <PropertyRef Name="Participant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JordanToursimModelStoreContainer">
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogIn" EntityType="Self.LogIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partners" EntityType="Self.Partners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Department_Cities" Association="Self.FK_Department_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_Trip" Association="Self.FK_Department_Trip">
+      <End Role="Trip" EntitySet="Trip" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Trip" Association="Self.FK_Order_Trip">
+      <End Role="Trip" EntitySet="Trip" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partners_Order" Association="Self.FK_Partners_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Partners" EntitySet="Partners" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

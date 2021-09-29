@@ -1,0 +1,412 @@
+﻿@model IEnumerable<JordanToursim.Models.Department>
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<style>
+    body {
+        overflow-x: hidden;
+        padding-right:0 !important;
+    }
+
+    .navbar .nav-link {
+        font-size: 13px;
+        text-transform: uppercase;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .navbar .nav-item.active {
+        border-left: #FFC300 3px solid;
+    }
+
+    .carousel-item {
+        height: 450px;
+    }
+
+    .carousel-image-1 {
+        background: url('../../Images/HomeImages/Petra.jpg');
+        background-size: cover;
+    }
+
+    .carousel-image-2 {
+        background: url('../../Images/HomeImages/Rum.jpg');
+        background-size: cover;
+    }
+
+    .carousel-image-3 {
+        background: url('../../Images/HomeImages/aqaba.jpg');
+        background-size: cover;
+    }
+
+    #home-heading {
+        position: relative;
+        min-height: 100px;
+        color: #fff;
+        background: url('../../Images/HomeImages/desert.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        text-align: center;
+    }
+
+    .dark-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .4);
+    }
+
+    #video-play {
+        position: relative;
+        min-height: 200px;
+        color: #fff;
+        background: url('../../Images/HomeImages/desert.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: 0 -300px;
+        text-align: center;
+    }
+
+        #video-play a {
+            color: white;
+        }
+
+    #page-header {
+        height: 200px;
+        background: url('image1.jpg');
+        background-position: 0 -360px;
+        background-attachment: fixed;
+        color: #fff;
+        border-bottom: 1px #eee solid;
+        padding-top: 50px;
+    }
+
+    .about-img {
+        margin-top: -60px;
+    }
+
+    #faq .card {
+        border: #4444;
+    }
+
+    #faq a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #faq .card-body, #faq .card-header {
+        background: #333;
+    }
+
+
+    .PopularCardImage {
+        width: 100%;
+        transition: 0.5s all ease-in-out;
+    }
+
+    .PopularCardImage:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <!-- lightbox link for using -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+    <title>Mobile Theme</title>
+</head>
+
+<body>
+    <!-- START HERE -->
+    <!-- NAVBAR -->
+    <!-- SHOWCASE SLIDER -->
+    <section id="showcase" class="bg-primary">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item carousel-image-1 active">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block text-left mb-5">
+                            <h1 class="display-3">Petra Trips</h1>
+                            <p class="lead display-5">dive deep into one of the 7 wonders in the ancient world to discover and have magnificent memories</p>
+                            <a href="/Home/Departments/4" class="btn btn-danger btn-lg">See now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item carousel-image-2 ">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block mb-5">
+                            <h1 class="display-3">WadiRum Trips</h1>
+                            <p class="lead">dive deep to see one of the most beautiful deserts in the world</p>
+                            <a href="#" class="btn btn-primary btn-lg">See More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item carousel-image-3 ">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block text-right mb-5">
+                            <h1 class="display-3">Aqaba</h1>
+                            <p class="lead">visit Aqaba beach and enjoy your vacation</p>
+                            <a href="/Home/Departments/8" class="btn btn-success btn-lg">See More</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+
+            <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- HOME ICON SECTION -->
+    <section id="home-icons" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 text-center">
+                    <i class="fas fa-calendar-check fa-3x mb-2 text-success"></i>
+
+                    <h3>Flexible time</h3>
+                    <p>flexible times during the whole year</p>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <i class="fas fa-address-card fa-3x mb-2 text-warning"></i>
+                    <h3>Using Identity</h3>
+                    <p>Can sign by your identity only</p>
+                </div>
+                <div class="col-md-4 mb-4 text-center">
+                    <i class="fas fa-bed fa-3x mb-2 text-danger"></i>
+                    <h3>Hostels</h3>
+                    <p> full services available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOME HEADING SECTION -->
+    <section id="home-heading" class="p-5">
+        <div class="dark-overlay">
+            <div class="row">
+                <div class="col">
+                    <div class="container pt-5">
+                        <h1>Are You Ready To Get Started</h1>
+                        <p class="d-none d-md-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur dolores ipsa aut nesciunt autem quis nisi dignissimos cupiditate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info" class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <h3>Sign in your mobile and laptop</h3>
+                    <p>Website can be use in diffrent platforms easy and with similar experince</p>
+                    <a href="about.html" class="btn-btn-outline-danger btn-lg">Learn More</a>
+                </div>
+
+                <div class="col-md-6 align-self-center">
+                    <img src="~/Images/HomeImages/laptop.png" class="img-fluid">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO PLAY -->
+    <section id="video-play">
+        <div class="dark-overlay">
+            <div class="row">
+                <div class="col">
+                    <div class="container p-5">
+                        <a href="#" class="video" data-video="https://www.youtube.com/embed/vVjz8LcOrEU" data-toggle="modal" data-target="#videoModal">
+                            <i class="fas fa-play fa-3x"></i>
+                        </a>
+                        <h1>See What We Do</h1>
+                        <p>dive and live experince with our programe! check video now</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO MODEl -->
+    <div class="modal fade" id="videoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss='modal'>
+                        <span>&times;</span>
+                    </button>
+                    <iframe src="" frameborder="0" height="350" style="width:100%" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO GALLERY -->
+
+
+
+    <h1 class="text-center">Our Trips</h1>
+    <p class="text-center">popular</p>
+    <div class="row">
+        @{
+            int Isten = 0;
+            foreach (var item in Model)
+            {
+                Isten++;
+                if (Isten != 10)
+                {
+                    <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <a href="/Home/Trips/@item.TripId">
+                                    <img class="PopularCardImage img-fluid" src="@Url.Content(item.DepartmentImage)" style="width:300px; height:350px"/>
+                                </a>
+                                <h5 class="card-title pt-3">@item.departmentName</h5>
+                                <p class="card-text">@item.City.CityName</p>
+                                <a href="/Home/Trips/@item.TripId" class="btn btn-primary">more details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else { break; }
+            }
+        }
+    </div>
+
+
+
+
+
+
+    <!-- TESTIMONIOALS -->
+    <section id="testimonials" class="p-4 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center">testimonials</h2>
+            <div class="row text-center">
+                <div class="col">
+                    <div class="slider">
+                        <div>
+                            <blockquote class="blockquote">
+                                <p class="mb-0">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
+                                </p>
+                                <footer class="blockquote-footer">
+                                    John Doe From
+                                    <cite title="Company 1">Company 1</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+
+                        <div>
+                            <blockquote class="blockquote">
+                                <p class="mb-0">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
+                                </p>
+                                <footer class="blockquote-footer">
+                                    Same Smith From
+                                    <cite title="Company 2">Company 2</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+
+                        <div>
+                            <blockquote class="blockquote">
+                                <p class="mb-0">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, reiciendis.
+                                </p>
+                                <footer class="blockquote-footer">
+                                    Meghan Wiliam From
+                                    <cite title="Company 3">Company 3</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <!-- lightbox link for Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+
+
+    @section scripts{
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+        <script>
+
+            //configare slider
+            $('.carousel').carousel({ interval: 6000, pause: 'hover' });
+
+            //video play
+            $(function () {
+                //auto play video modal
+                $('.video').click(function () {
+                    var theModal = $(this).data("target"),
+                        videoSRC = $(this).attr('data-video'),
+                        videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=0&showinfo=0&html5=1&autoplay=1";
+                    $(theModal + ' iframe').attr('src', videoSRCauto);
+                    $(theModal + ' button.close').click(function () {
+                        $(theModal + ' iframe').attr('src', videoSRC);
+                    });
+                });
+            });
+
+
+            // init slider
+            $('.slider').slick({
+                infinite: true,
+                slideToShow: 1,
+                slideToScroll: 1
+            })
+
+
+
+
+        </script>
+    }
+
+
+</body>
+
+</html>
+
+
+
+
+

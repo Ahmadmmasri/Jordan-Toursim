@@ -1,0 +1,273 @@
+﻿@model IEnumerable<JordanToursim.Models.Order>
+
+@{
+    ViewBag.Title = "Requests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- lightbox link for using -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css" integrity="sha512-wghhOJkjQX0Lh3NSWvNKeZ0ZpNn+SPVXX1Qyc9OCaogADktxrBiBdKGDoqVUOyhStvMBmJQ8ZdMHiR3wuEq8+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    .img-fluid:hover {
+        border: 2px solid #fff;
+        box-shadow: 10px 10px 5px #ccc;
+        -moz-box-shadow: 10px 10px 5px #ccc;
+        -webkit-box-shadow: 10px 10px 5px #ccc;
+        -khtml-box-shadow: 10px 10px 5px #ccc;
+    }
+
+    img {
+        border-radius: 30%;
+    }
+
+    tr td {
+        text-align: center;
+    }
+</style>
+<h2>Requests</h2>
+
+
+<!--Show sucess message-->
+@{
+    var state = ViewBag.successDelete;
+    if (state == "true")
+    {
+        ViewBag.successDelete = "false";
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            function JSalert() {
+                Swal.fire({
+                    title: 'Sucess!',
+                    imageUrl: '../../Images/TempPic/sucessAlert.png',
+                    imageWidth: 350,
+                    imageHeight: 220,
+                    imageAlt: 'Custom image',
+                    confirmButtonColor: '#3cd63c',
+                });
+            }
+            JSalert();
+        </script>
+
+    }
+
+
+}
+
+@{int num = 0;
+    ViewBag.num = Html.Action("CitiesNumber");
+}
+
+<div class="table-responsive">
+    <table class="table table-striped table-dark wrappier tablesorter">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TripId)
+                </th>
+                <th>
+                    Traveler ID
+                </th>
+                <th data-placeholder="name">
+                    @Html.DisplayNameFor(model => model.ParticipantName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Participant_National_ID)
+                </th>
+                <th data-placeholder="dd/mm/yy">
+                    @Html.DisplayNameFor(model => model.Participant_Birthdate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Participant_Email)
+                </th>
+                <th class="filter-select">
+                    @Html.DisplayNameFor(model => model.NumberList)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Participant_Phone_No)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Participant_Image_IDcard)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order_Date)
+                </th>
+                <th class="filter-select">
+                    @Html.DisplayNameFor(model => model.Movement_way)
+                </th>
+                <th class="filter-select">
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    Depart
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isPartner)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.Order_Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trip.Trip_Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParticipantName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant_National_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant_Birthdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant_Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberList)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Participant_Phone_No)
+                    </td>
+                    <td>
+                        <div class="col-md-4">
+                            <a href="@Url.Content(item.Participant_Image_IDcard)" data-toggle="lightbox" data-gallery="img-gallery" data-height="533" data-width="533">
+                                <img width="50" height="50" src="~/Images/TempPic/IdentityPic.png" onerror="this.src='https://image.flaticon.com/icons/png/512/48/48639.png';" alt="Photo" class="img-fluid">
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order_Date)
+                    </td>
+                    <td>
+                        @if (item.Movement_way == true)
+                        {<span>Bus</span> }
+                        else
+                        {<span>Car</span>}
+                    </td>
+                    <td>
+                        @{
+
+                            foreach (KeyValuePair<int, string> ele1 in ViewBag.My_City)
+                            {
+
+                                if (item.City == null)
+                                {
+                                    <p>No city</p>
+                                    break;
+                                }
+                                else if (Int32.Parse(item.City) == ele1.Key)
+                                {
+                                    <p>@ele1.Value</p>
+                                }
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trip.Department_Name)
+                    </td>
+                    <td>
+                        @if (item.isPartner == true)
+                        {<span>Group</span> }
+                        else
+                        {<span>Alone</span>}
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order_Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trip.Trip_Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Response", new { id = item.Participant_ID }) |
+                        @Html.ActionLink("Details", "EscortsDetail", new { id = item.Participant_ID }) |
+                        @if (item.Order_Status == false)
+                        {
+                            @Html.ActionLink("Delete", "DeleteOrder", new { id = item.Participant_ID })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+@section scripts{
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <!-- lightbox link for Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+    <script>
+        // Get the current year for the copyright
+        $('#year').text(new Date().getFullYear());
+
+        //configare slider
+        $('.carousel').carousel({ interval: 6000, pause: 'hover' });
+
+        //video play
+        $(function () {
+            //auto play video modal
+            $('.video').click(function () {
+                var theModal = $(this).data("target"),
+                    videoSRC = $(this).attr('data-video'),
+                    videoSRCauto = videoSRC + "?modestbranding=1&rel=0&controls=0&showinfo=0&html5=1&autoplay=1";
+                $(theModal + ' iframe').attr('src', videoSRCauto);
+                $(theModal + ' button.close').click(function () {
+                    $(theModal + ' iframe').attr('src', videoSRC);
+                });
+            });
+
+        });
+
+        // light box script
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        $(document).ready(function () {
+            $(".tablesorter").tablesorter({
+                widthFixed: true,
+                widgets: ["zebra", "filter"],
+                widgetOptions: {
+                    filter_cssFilter: '',
+                    filter_childRows: false,
+                    filter_hideFilters: false,
+                    filter_reset: '.rest',
+                    filter_saveFilters: true,
+                    filter_searchDelay: 400,
+                    filter_startWith: false,
+                },
+
+            });
+            $("input[data-column=8],input[data-column=16]").hide();
+
+        }
+
+        );
+
+    </script>
+
+}
+

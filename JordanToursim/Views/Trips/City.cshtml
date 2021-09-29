@@ -1,0 +1,54 @@
+﻿@model JordanToursim.Models.City
+
+@{
+    ViewBag.Title = "City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-control {
+        border-radius: 25px !important;
+    }
+</style>
+<h2>City</h2>
+
+@using (Html.BeginForm("City", "Trips", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Action("CitiesDropDown")
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>City</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CityName)
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cityImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="ImageCity" name="ImageCity" class="form-control" enctype="multipart/form-data" required accept="image/png, image/jpeg" />
+            @Html.ValidationMessageFor(model => model.cityImage, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsPublish, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.IsPublish)
+                @Html.ValidationMessageFor(model => model.IsPublish, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

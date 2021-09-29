@@ -1,0 +1,207 @@
+﻿@model JordanToursim.Models.LogIn
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/LayoutLogin.cshtml";
+
+}
+<style>
+
+
+    body {
+        background-image: url('../Images/TempPic/LoginCoverPicBlur.Jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+    }
+
+    .body-content {
+        width: 100% !important;
+        padding: 0 15px;
+    }
+
+    .container {
+        text-align: center;
+        padding-top: 3%;
+    }
+
+    .container .imgSector {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+
+    }
+
+    .container .formSector {
+        margin: 0px;
+
+    }
+
+    .container .Text {
+        background-color: #fff;
+        margin: 0 38%;
+        padding-top: 300px;
+    }
+
+
+        .container .formSector {
+            animation-duration: 3s;
+            animation-name: slidein;
+            animation-iteration-count: 2;
+            animation-direction: alternate;
+        }
+
+    @@keyframes slidein {
+        from {
+            margin: 500px;
+        }
+
+        to {
+            margin: 0;
+        }
+    }
+
+    .container .formSectorHide {
+        animation-duration: 3s;
+        animation-name: slidein;
+        animation-iteration-count: 2;
+        animation-direction: alternate;
+    }
+
+    @@keyframes slidein {
+        from {
+            margin: 0;
+        }
+
+        to {
+            margin: 500px;
+        }
+    }
+
+    .form-group {
+        padding: 10px 33% 3px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .form-control {
+        border-radius: 25px !important;
+    }
+
+    .form-group .control-label {
+        color: #cbb9cf;
+    }
+
+    .backBut {
+        text-decoration: none;
+        color: #fff;
+        background: #6a6aac;
+        border-radius: 4px;
+        font-weight: normal;
+        text-transform: uppercase;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .backBut:hover {
+        color: rgba(255, 255, 255, 1);
+        box-shadow: 0 5px 15px rgba(51, 153, 204, .5);
+    }
+
+
+        
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal" onload="LoadAnimate()">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div id="LoginCover" class="ImageCover" loading="lazy">
+
+    <div class="container">
+
+        <div class="imgSector">
+            <span id="LogTitile" style=" position: absolute; top: 18%; left: 35%; z-index: 2; font-size:1.2em; color:#f2f2f2; font-family:'Times New Roman', Times, serif">LogIn</span>
+            <img src="~/Images/TempPic/LoginCoverPic.jpg" width="450" height="330" style="box-shadow: 0px 0px 25px 1px; position:relative;" loading="lazy" />
+
+
+            <div id="Form" class="formSector">
+                <div class="text">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Admin, htmlAttributes: new { @class = "control-label col-md-2 ", @autocomplete = "off" })
+                        <div class="col-md-10 col-lg-10">
+                            @*@Html.EditorFor(model => model.Admin, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <input type="text" class="form-control" name="Admin" autocomplete="off" autofocus/>
+                            @Html.ValidationMessageFor(model => model.Admin, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div id="passwordfield" class="col-md-10 col-lg-10">
+                            @Html.PasswordFor(model => model.password,  new { @class = "form-control" } )
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                        <span style="color:crimson;">@ViewBag.error </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Login" class="btn btn-default" style="margin-right: 25%;" onclick="go()"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div style="position:absolute; margin-left:20%; margin-top:-25px">
+        <a href="/Home" class="backBut" onclick="go()" style="margin: 0 15% 30px; width: 50px; height: 50px; padding: 10px 13px; font-size: 18px; line-height: 1.33; border-radius: 50%; ">
+                <i class="fas fa-chevron-circle-left"></i>
+        </a>
+    </div>
+
+</div>
+
+</div>
+}
+
+
+  
+@section Scripts{
+
+
+    <script type="text/javascript">
+        $("#LogTitile").fadeOut().fadeIn().fadeOut().fadeIn();
+
+
+
+        
+
+
+        function go() {
+            $("#Form").removeClass("formSector").addClass("formSectorHide");
+            $('.ImageCover').fadeOut().fadeIn();
+            setTimeout(function go2() {   //  call a 3s setTimeout when the loop is called
+                $(".backBut").fadeOut("fast");
+                $("#Form").removeClass("formSector");
+            }, 30)
+
+        }
+
+
+
+
+    </script>
+
+}

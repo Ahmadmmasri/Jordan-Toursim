@@ -1,0 +1,270 @@
+﻿@model JordanToursim.Models.Trip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+
+        .container body-content {
+            width: 1200px;
+        }
+        /*media qoures to display on mobile*/
+        @@media (max-width:700px) {
+            .imgCover {
+                background-image: url('../../Images/TempPic/DetailsPic.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin: -70px 0 -70px 0;
+                padding: 60px 0 0 0;
+                margin-right: 0px;
+                width: 395px;
+            }
+
+            .body-content {
+                width: 400px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .form-horizontal .form-group {
+                margin-right: 15px;
+                margin-left: 15px;
+                color: #f2f2f2c7;
+            }
+
+            .container {
+                padding-right: 0;
+                padding-left: 0;
+                margin-right: 0;
+                margin-left: 0;
+            }
+
+            .bottomButtons {
+                float: right;
+                padding-right: 20px
+            }
+
+            .imgCover .form-horizontal .Headerspace {
+                height: 20px;
+                max-height: 20px;
+            }
+
+               
+        }
+        /*end of mobile view*/
+
+
+
+        /*media qoures to display on desktop & laptop*/
+        @@media (min-width:1000px) { /* big landscape tablets, laptops, and desktops */
+            .imgCover {
+                background-image: url('../../Images/TempPic/DetailsPic.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin: -20px -40px 0px 0;
+                height: 700px;
+            }
+
+            .container body-content {
+                width: 1400px;
+            }
+
+            .imgCover .form-horizontal .Headerspace {
+                height: 140px;
+                max-height: 140px;
+            }
+            .dl-horizontal {
+                padding: 20px;
+            }
+
+            dt, dd {
+                display: block;
+                float: left;
+                margin-top: 15px;
+            }
+        }
+        /*end of laptop view*/
+    </style>
+</head>
+<div class="imgCover">
+    <h1 class="PageTitle" style="font-weight: 600; font-size: 2.5em; color: #5baed0; margin-left:40px !important">Details Page</h1>
+    <div class="Headerspace">&nbsp;</div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Date_Time_From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Date_Time_From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Date_Time_To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Date_Time_To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ticket_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticket_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Image_web)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Image_web)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trip_Image_phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trip_Image_phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPublished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusMovement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusMovement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lunch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lunch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OvernightStay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OvernightStay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TouristGuide)
+        </dt>
+
+        <dd style="padding-bottom:50px">
+            @Html.DisplayFor(model => model.TouristGuide)
+        </dd>
+
+    </dl>
+</div>
+<p class="bottomButtons">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TripId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+@section Scripts {
+
+    <!--Date picker to prevent diffrent between start and end data + make sure trip date start from today-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+            type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script type="text/javascript">
+
+        //photo fadeIn effect
+        $(document).ready(function () {
+            $(".imgCover").hide().fadeIn();
+        });
+
+ 
+
+
+        //Title head Animation
+        var textWrapper = document.querySelector('.PageTitle');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({ loop: true })
+            .add({
+                targets: '.PageTitle .letter',
+                opacity: [0, 2],
+                easing: "easeInOutQuad",
+                duration: 2250,
+                delay: (el, i) => 170 * (i + 1)
+            }).add({
+                targets: '.PageTitle',
+                opacity: 0,
+                duration: 1000,
+                easing: "easeOutExpo",
+                delay: 1000
+            });
+        //end of Animation
+
+
+    </script>
+}

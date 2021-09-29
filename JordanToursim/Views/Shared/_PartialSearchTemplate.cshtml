@@ -1,0 +1,43 @@
+﻿
+
+<style>
+    #search {
+        font-size: 17px;
+        float: left;
+        width: 80%;
+        background: #fff;
+    }
+
+    button {
+        background: #2196F1;
+        color: #f2f2f2;
+        margin-left: 0
+    }
+
+    form input {
+        margin-right: 10px;
+        margin-bottom: 10PX;
+    }
+
+
+    FORM, .form-control {
+        font-size: 17px;
+        float: left;
+        width: 80%;
+        margin-right: 0;
+    }
+</style>
+
+@using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        <br />
+        <b>Search By</b> <br />
+        @Html.RadioButton("SearchBy", "location", true)<span>Location</span> 
+        @Html.RadioButton("SearchBy", "city")<span>City</span>
+        @Html.RadioButton("SearchBy", "price")<span>Price</span>
+        <br />
+
+        @Html.TextBox("search", "", new { @class = "form-control" }) 
+        <button type="submit" value="Search" class="btn btn-md bg"><i class="fa fa-search" aria-hidden="true"></i></button>
+    }
+<br />

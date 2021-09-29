@@ -1,0 +1,34 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+
+}
+@if (ViewBag.locationSearch == true && @ViewBag.countlocation != 0)
+{
+    @Html.Partial("_PartialDepartment");
+}
+else if (ViewBag.locationCity == true && @ViewBag.countCity != 0)
+{
+    @Html.Partial("_partialCities");
+}
+else if (ViewBag.locationPrice == true && @ViewBag.countPrice != 0)
+{
+    @Html.Partial("_partialTrip");
+}
+else if (@ViewBag.nullV == null || @ViewBag.nullV == "" || @ViewBag.nullCount == 0)
+{
+    @Html.Partial("_PartialSearchTemplate") ;
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-lg-8 text-center mt-5" style="margin-bottom:15%">
+            <p>No result found</p>
+        </div>
+    </div>
+}
+
+
+
+

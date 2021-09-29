@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Review";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<style>
+    #NID {
+        padding: 10px;
+        font-size: 17px;
+        float: left;
+        width: 80%;
+        background: #fff;
+    }
+
+    #id {
+        padding: 10px;
+        font-size: 17px;
+        float: left;
+        width: 80%;
+        background: #fff;
+    }
+
+    button {
+        float: left;
+        width: 5%;
+        padding: 5px;
+        background: #2196F3;
+        color: white;
+        font-size: 15px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+    }
+    .form{
+        padding-left:40px;
+    }
+    button{
+        height:46px
+    }
+</style>
+
+
+<div class="form">
+    @using (Html.BeginForm("Review", "Home", FormMethod.Get))
+    {
+        <br />
+        <b>Search </b>
+        <p>please enter your id</p>
+        <br />
+        <input id="id" name="id" type="text" class="form-control" autocomplete="off" />
+
+        <button type="submit" value="id"><i class="fa fa-search" aria-hidden="true"></i></button>
+        if (@ViewBag.idMsg != null && @ViewBag.idMsg != "")
+        {
+
+            <b id="showHide">&nbsp; @ViewBag.idMsg </b>
+
+        }
+    }
+
+    <br />
+    <br />
+
+
+
+
+    @using (Html.BeginForm("Review", "Home", FormMethod.Get))
+    {
+        <br />
+        <p>or using your national number</p>
+        <br />
+        <input id="NID" name="NID" type="text" class="form-control" autocomplete="off" />
+        <button type="submit" value="NationalId" class=""><i class="fa fa-search" aria-hidden="true"></i></button>
+    }
+    &nbsp;
+    @if (ViewBag.NIdMsg != null)
+    {
+        <b id="NationalID">@ViewBag.NIdMsg</b>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#showHide").hide();
+            $("#showHide").fadeIn(2000).fadeOut(1000);
+
+
+        });
+    </script>
+
+}
+
+
+
+

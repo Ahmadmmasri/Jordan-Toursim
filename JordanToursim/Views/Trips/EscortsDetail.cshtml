@@ -1,0 +1,89 @@
+﻿@model IEnumerable<JordanToursim.Models.Partner>
+
+@{
+    ViewBag.Title = "EscortsDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EscortsDetail</h2>
+
+@{ 
+    if (Model.Count() >= 1)
+    {
+        <p>
+            @Html.ActionLink("Back", "Requests")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Participant_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerNationalNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerBirthDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PartnerIdentityImg)
+                </th>
+                <th>
+                    With
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Participant_ID)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerNationalNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerBirthDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartnerIdentityImg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order.ParticipantName)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    }
+
+
+    else
+    {
+        @ShowEmptyPage();
+    }
+}
+
+@*empty item template*@
+@helper ShowEmptyPage()
+{
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <h2 class="display-1">No Escorts Availiable for this person</h2>
+        </div>
+    </div>
+}

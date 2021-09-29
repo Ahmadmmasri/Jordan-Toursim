@@ -1,0 +1,323 @@
+﻿@model IEnumerable<JordanToursim.Models.Trip>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/views/shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css" integrity="sha512-wghhOJkjQX0Lh3NSWvNKeZ0ZpNn+SPVXX1Qyc9OCaogADktxrBiBdKGDoqVUOyhStvMBmJQ8ZdMHiR3wuEq8+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+    :root {
+        --cyan: hsl(180, 62%, 55%);
+        --grayishBlue: hsl(229, 6%, 66%);
+        --weight1: 200;
+        --weight2: 400;
+        --weight3: 600;
+    }
+
+    body {
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        margin-right: 0;
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0
+    }
+
+
+    @@media (max-width: 400px) {
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+
+
+    .box {
+        border-radius: 5px;
+        box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+        padding: 30px;
+        margin: 20px;
+    }
+
+    table td {
+        text-align: center;
+    }
+
+    img {
+        margin-top: -40px;
+        float: right;
+    }
+
+    @@media (max-width: 450px) {
+        .box {
+            height: 200px;
+        }
+    }
+
+    .cyan {
+        border-top: 3px solid var(--cyan);
+    }
+
+    h2 {
+        color: var(--varyDarkBlue);
+        font-weight: var(--weight3);
+    }
+
+    .box-down:hover > .imgSearch {
+        animation-name: rotate;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    tr td {
+        padding-top: 6%;
+    }
+
+        tr td img {
+            border-radius: 50%
+        }
+
+
+
+
+    @@keyframes rotate {
+        0% {
+            transform: rotate(-360deg) translate(165px) rotate(360deg);
+        }
+
+        100% {
+            transform: rotate(200deg) translate(-165px) rotate(-320deg);
+        }
+    }
+</style>
+<div class="backgroundCir" style="width:120%; height:100%; position:absolute; margin:0 0 0 -100px; padding-top:15%; z-index:1">
+    <div class="circle"></div>
+</div>
+
+
+<body>
+    <h2>Index</h2>
+    <span class="">
+        @Html.ActionLink(" Create ", "CitiesList", null, new { @class = "fas fa-city btn btn-success btn-lg" })
+    </span>
+    <span>
+        @Html.ActionLink(" Location", "DepartmentList", null, new { @class = "fas fa-map-marked-alt btn btn-info btn-lg" })
+    </span>
+    <span>
+        @Html.ActionLink(" Trip", "Create", null, new { @class = "fa fa-plus circle btn btn-warning btn-lg" })
+    </span>
+
+
+    @section scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".tablesorter").tablesorter({
+                    widthFixed: true,
+                    widgets: ["zebra", "filter"],
+                    widgetOptions: {
+                        filter_cssFilter: '',
+                        filter_childRows: false,
+                        filter_hideFilters: false,
+                        filter_reset: '.rest',
+                        filter_saveFilters: true,
+                        filter_searchDelay: 400,
+                        filter_startWith: false,
+                    },
+
+                });
+                $("input[data-column=14], input[data-column=7], input[data-column=8]").hide();
+
+            }
+
+            );
+
+        </script>
+    }
+
+    <table class="tablesorter">
+        <thead>
+            <tr>
+                <th data-placeholder="name">
+                    Name
+                </th>
+                <th data-placeholder="mm/dd/yyyy">
+                    From
+                </th>
+                <th data-placeholder="mm/dd/yyyy">
+                    To
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trip_Capacity)
+                </th>
+                <th class="filter-select" data-placeholder="Select city">
+                    @Html.DisplayNameFor(model => model.City_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department_Name)
+                </th>
+                <th data-placeholder=">0">
+                    @Html.DisplayNameFor(model => model.Ticket_Price)
+                </th>
+                <th data-filter="false">
+                    @Html.DisplayNameFor(model => model.Trip_Image_web)
+                </th>
+                <th data-filter="false">
+                    @Html.DisplayNameFor(model => model.Trip_Image_phone)
+                </th>
+                <th data-placeholder="Select">
+                    @Html.DisplayNameFor(model => model.IsPublished)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BusMovement)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lunch)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OvernightStay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TouristGuide)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="padding-top: 6%;">
+                        @Html.DisplayFor(modelItem => item.Trip_Name)
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @*@Html.DisplayFor(modelItem => item.Trip_Date_Time_From.Date)*@
+                        <p>@item.Trip_Date_Time_To.Date.ToShortDateString() -</p>
+
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @*@Html.DisplayFor(modelItem => item.Trip_Date_Time_To.Date)*@
+                        <p>@item.Trip_Date_Time_From.Date.ToShortDateString()</p>
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @Html.DisplayFor(modelItem => item.Trip_Capacity)
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{
+
+                            foreach (KeyValuePair<int, string> ele1 in ViewBag.My_City)
+                            {
+
+                                if (item.City_Name == null)
+                                {
+                                    <p>No city</p>
+                                    break;
+                                }
+                                else if (Int32.Parse(item.City_Name) == ele1.Key)
+                                {
+                                    <p>@ele1.Value</p>
+                                }
+                            }
+                        }
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @Html.DisplayFor(modelItem => item.Department_Name)
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @Html.DisplayFor(modelItem => item.Ticket_Price)
+                    </td>
+                    <td style="padding-top: 2%;">
+                        <img src="@Url.Content(item.Trip_Image_web)" width="100" height="100" style="margin:10px">
+                    </td>
+                    <td style="padding-top: 2%;">
+                        <img src="@Url.Content(item.Trip_Image_phone)" width="100" height="100" style="margin:10px">
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{if (item.IsPublished == true)
+                            {<i class="appear text-success fas fa-check fa-lg"> @T(item.IsPublished)</i> }
+                        else
+                        {<i class="appear text-danger fas fa-times fa-lg"> @F(item.IsPublished)</i>}}
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{if (item.BusMovement == true)
+                            {<i class="appear text-success fas fa-check fa-lg"> @T(item.BusMovement)</i> }
+                        else
+                        {<i class="appear text-danger fas fa-times fa-lg"> @F(item.BusMovement)</i>}}
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{if (item.Lunch == true)
+                            {<i class="appear text-success fas fa-check fa-lg"> @T(item.Lunch)</i> }
+                        else
+                        {<i class="appear text-danger fas fa-times fa-lg"> @F(item.Lunch)</i>}}
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{if (item.OvernightStay == true)
+                            {<i class="appear text-success fas fa-check fa-lg"> @T(item.OvernightStay)</i> }
+                        else
+                        {<i class="appear text-danger fas fa-times fa-lg"> @F(item.OvernightStay)</i>}}
+
+                    </td>
+                    <td style="padding-top: 6%;">
+                        @{if (item.TouristGuide == true)
+                            {<i class="appear text-success fas fa-check fa-lg"> @T(item.TouristGuide)</i> }
+                        else
+                        {<i class="appear text-danger fas fa-times fa-lg"> @F(item.TouristGuide)</i>}}
+                    </td>
+                    <td style="padding-top: 4%; padding: 0; line-height: 1.428; ">
+                        <a style="width: 50px; height: 50px; padding: 10px 16px; font-size: 18px; line-height: 1.33; border-radius: 25px; margin-top:4px;" class="submitTrip1 btn btn-warning btn-circle btn-lg" href="@Url.Action("Edit", "Trips", new { id = item.TripId})"><i class="fas fa-edit"></i></a>
+                        <a style=" width: 50px; height: 50px; padding: 10px 16px; font-size: 18px; line-height: 1.33; border-radius: 25px; margin-top:4px;" class="submitTrip2 btn btn-info btn-circle btn-lg" href="@Url.Action("Details", "Trips", new { id = item.TripId})"><i class="fas fa-ellipsis-h"></i></a>
+                        <a style=" width: 50px; height: 50px; padding: 10px 16px; font-size: 18px; line-height: 1.33; border-radius: 25px; margin-top:4px;" class="submitTrip3 btn btn-danger btn-circle btn-lg" href="@Url.Action("Delete", "Trips", new { id = item.TripId})"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <hr />
+</body>
+
+<div class="row1-container">
+    <div class="box box-down cyan">
+        <h2>Statics</h2>
+        count= @Html.Action("Count") <br />
+        max= @Html.Action("max") <br />
+        min= @Html.Action("min") <br />
+        average= @Html.Action("Average")  <br />
+        <img class="imgSearch" src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+    </div>
+</div>
+
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+
+    $(window).on("load", function () {
+        $(".backgroundCir").fadeOut("4000").delay(3000);
+        $(".appear").hide().fadeIn("slow");
+
+    });
+</script>
+
+@functions{
+    public string T(bool Value)
+    {
+        return Value.ToString().Substring(0, Value.ToString().Length - 3);
+    }
+
+    public string F(bool Value)
+    {
+        return Value.ToString().Substring(0, Value.ToString().Length - 4);
+    }
+}
+
+
+
+
+

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<JordanToursim.Models.Partner>
+@{
+    ViewBag.Title = "exportPdf";
+    Layout = "";
+}
+
+
+<div style="height:50px">&nbsp;</div>
+
+<div class="col-md-12" style="">
+    <div class="card bg-danger text-white text-center" style="color: #343a40 !important; text-align: center; background-color: #f2f2f2 !important; ">
+        <div class="card-body">
+
+            <br />
+            <div style="background-color: #343a40; border-radius:10px;">
+                <h1 style="color:#f2f2f2">JT Ticket</h1>
+            </div>
+
+            <hr />
+
+            @{
+                bool IsEnd = false;
+                int EsortsNumber = Model.Count();
+
+                while (IsEnd == false)
+                {
+                    //show details
+                    var i = 0;
+                    <p>Trip Number:  @ViewBag.TripDetails[i++]</p>
+                    <p>Order Number:  @ViewBag.TripDetails[i++]</p>
+                    <p>Trip Name:  @ViewBag.TripDetails[i++]</p>
+                    <p>Person Name: @ViewBag.TripDetails[i++]</p>
+                    if (EsortsNumber > 0)
+                    {
+                        double PartnersNumber = EsortsNumber * ViewBag.TripDetails[i++];<p>Price: @PartnersNumber$</p>}
+                    else
+                    { <p> Price: @ViewBag.TripDetails[i++]$ </p> }
+                <p> Trip Date: @ViewBag.TripDetails[i++] </p>
+                //end show details
+
+                    <hr />
+
+                    //Show escorts for this traveler
+                    if (EsortsNumber > 0)
+                    {
+                        <p> @ViewBag.TripDetails[3] Escorts : </p>
+                        foreach (var item in Model)
+                        {
+                            <p>@item.PartnerName</p>
+                        }
+                    }
+                    //end of show escorts
+
+                    //show when alone travler
+                    else
+                    {<p style="font-size:1.5rem">Individual</p> }
+                    <br />
+                    //end of alone traveler
+
+                    //out while
+                    IsEnd = true;
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+

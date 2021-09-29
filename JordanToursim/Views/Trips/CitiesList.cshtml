@@ -1,0 +1,29 @@
+﻿@model IEnumerable<JordanToursim.Models.City>
+
+@{
+    ViewBag.Title = "CitiesList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cities</h2>
+
+
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                                <a href="/Trips/City/@item.Id" style="text-decoration:none">
+                                    <img class="PopularCardImage img-fluid" src="@Url.Content(item.cityImage)" width="250" height="350" />
+                                    <div style="text-align:center; margin-bottom:20px;">
+                                        <h3 class="card-title">@item.CityName</h3>
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+        }
+    }
+</div>

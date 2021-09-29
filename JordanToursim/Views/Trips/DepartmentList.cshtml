@@ -1,0 +1,77 @@
+﻿@model IEnumerable<JordanToursim.Models.Department>
+
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .Image, .Text {
+        width: 100%;
+        transition: 0.5s all ease-in-out;
+        color: lightgray;
+    }
+
+        .Image:hover, .Text:hover {
+            transform: scale(1.2);
+            color: #f2f2f2
+        }
+</style>
+
+<h2>Locations</h2>
+
+
+<p>@Session["Message"]</p>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <a href="/Trips/CreateDep" style="text-decoration:none">
+                    <p class="Text" style="position:absolute; margin: 40% 30%; font-size:4.5rem; z-index:3">Create</p>
+                    <img class="img-fluid" src="~/Images/TempPic/CreateDep.jpg" width="300" height="350" />
+                    <div style="text-align:center; margin-bottom:20px;">
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="/Trips/DepaEdit/@item.DepartmentId" style="text-decoration:none">
+                            <p class="Text" style="position:absolute; margin: 28% 37%; font-size:2.5rem; z-index:3">Edit</p>
+                            <img class="Image img-fluid" src="@Url.Content(item.DepartmentImage)"  width="300" height="350" />
+                            <div style="text-align:center; margin-bottom:20px;">
+                                <h3 class="card-title">@item.City.CityName</h3>
+                                <h3 class="card-title">@item.departmentName</h3>
+                                <a style=" " class="submitTrip3 btn btn-danger btn-circle btn-lg" href="@Url.Action("DeleteDep", "Trips", new { id = item.DepartmentId })"><i class="fas fa-trash"></i></a>
+
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+<script>
+    document.onload(function () {
+        alert("This Trip have Orders Cant be delete");
+    });
+</script>
+
+
+

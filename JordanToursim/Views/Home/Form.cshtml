@@ -1,0 +1,277 @@
+﻿@model JordanToursim.Models.Order
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<style>
+    .hidden{
+        display:none;
+    }
+    .show{
+        display:contents
+    }
+    .form{
+        margin-left:50px
+    }
+</style>
+<div class="form">
+    <h2>Form</h2>
+    @*call cities function*@
+    @Html.Action("CitiesDropDown")
+    @*end@**@
+
+    @using (Html.BeginForm("Form", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Order</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.TripId, new { disabled = "disabled", @readonly = "readonly" })
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.Participant_ID)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ParticipantName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ParticipantName, new { htmlAttributes = new { @class = "form-control", } })
+            @Html.ValidationMessageFor(model => model.ParticipantName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Participant_National_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Participant_National_ID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Participant_National_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Participant_Birthdate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Participant_Birthdate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Participant_Birthdate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Participant_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Participant_Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Participant_Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberList, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @{
+                List<SelectListItem> Numlst = new List<SelectListItem>();
+                Numlst.Add(new SelectListItem { Text = "079", Value = "079" });
+                Numlst.Add(new SelectListItem { Text = "078", Value = "078" });
+                Numlst.Add(new SelectListItem { Text = "077", Value = "077" });
+            }
+            @Html.DropDownListFor(model => model.NumberList, Numlst, "--Select Type--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NumberList, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Participant_Phone_No, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Participant_Phone_No, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Participant_Phone_No, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Participant_Image_IDcard, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="IdentityImage" name="IdentityImage" class="form-control" enctype="multipart/form-data" required accept="image/png, image/jpeg" />
+            @Html.ValidationMessageFor(model => model.Participant_Image_IDcard, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Order_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <p style="padding-left:15px;">Available between <span class="text-success">@ViewBag.From</span> - <span class="text-success">@ViewBag.To</span> </p>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Order_Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Order_Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Movement_way, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+
+                @Html.RadioButtonFor(m => m.Movement_way, false, new { @checked = "true", @id = "Car" }) personal Car  &nbsp &nbsp &nbsp &nbsp
+                @Html.RadioButtonFor(m => m.Movement_way, true, new { @id = "Bus" }) Bus
+
+                @Html.ValidationMessageFor(model => model.Movement_way, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group hidden" id="CityState">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.DropDownListFor(model => model.City, Session["cityList"] as SelectList, "-- Select city --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.isPartner, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.isPartner, new { @checked = "checked" })
+                @Html.ValidationMessageFor(model => model.isPartner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.Order_Status)
+
+    <div class="form-group">
+        <b class="control-label col-md-2">JT Customer Agreement :</b> <br />
+        <div class="col-md-4">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.agreement)
+                @Html.ValidationMessageFor(model => model.agreement, "", new { @class = "text-danger" })
+                <span>I understand that I am responsible of all data I provide and any unaccurate information can cancel my order</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group hidden" id="divState">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="PartnerButt" type="submit" value="Add Escort" name="submitButton" class="btn btn-primary" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="Add" type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>
+
+@section Scripts
+    {
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/ui-lightness/jquery-ui.css"
+          rel="Stylesheet" type="text/css" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+
+        window.onload = (event) => {
+            if ($("#isPartner").is(":checked")) {
+                $("#divState").removeClass("hidden")
+                $("#divState").addClass("container")
+                button.disabled = true
+            }
+            else {
+                $("#divState").addClass("hidden")
+                button.disabled = false
+            }
+        };
+
+        //check upload image/file size
+        $("input[type='file']").on("change", function () {
+            if (this.files[0].size > 2000000) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Attention',
+                    text: 'file too big, please upload Image less than 2mb',
+                })
+                $(this).val('');
+                console.log("work");
+            }
+        });
+        //end
+
+        //------------------------------------------------------------------------------------------------------
+
+        //show / hide cities option
+        $(function () {
+            var name1 = $('input[name="Movement_way"]:checked').val();
+            var name2 = $("#Bus").val;
+            $("#Car").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#CityState").removeClass("show")
+                    $("#CityState").addClass("hidden")
+                } 
+            });
+
+            $("#Bus").click(function () {
+                if (name1 == "Bus") {
+                    $("#CityState").removeClass("show")
+                    $("#CityState").addClass("hidden")
+                }
+                else {
+                    $("#CityState").removeClass("hidden")
+                    $("#CityState").addClass("show")
+                }
+            });
+        });
+        //end
+
+        //show/hide partner button
+        $(function () {
+            const button = document.getElementById('Add')
+            $("#isPartner").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#divState").removeClass("hidden")
+                    $("#divState").addClass("container")
+                    button.disabled = true
+                }
+                else {
+                    $("#divState").addClass("hidden")
+                    button.disabled = false
+                }
+            });
+        });
+        //end
+
+        //$(function () {
+        //    const button = document.getElementById('Add')
+        //    $("#PartnerButt").click(function () {
+        //        $("#isPartner").prop('checked', false);
+        //        $("#divState").removeClass("container")
+        //        $("#divState").addClass("hidden")
+        //    });
+        //});
+
+
+
+    </script>
+
+}
+

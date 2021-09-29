@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JordanToursimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="JordanToursimEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="JordanToursimModel.City" />
+    <EntitySet Name="Departments" EntityType="JordanToursimModel.Department" />
+    <EntitySet Name="LogIns" EntityType="JordanToursimModel.LogIn" />
+    <EntitySet Name="Orders" EntityType="JordanToursimModel.Order" />
+    <EntitySet Name="Partners" EntityType="JordanToursimModel.Partner" />
+    <EntitySet Name="sysdiagrams" EntityType="JordanToursimModel.sysdiagram" />
+    <EntitySet Name="Trips" EntityType="JordanToursimModel.Trip" />
+    <AssociationSet Name="FK_Department_Cities" Association="JordanToursimModel.FK_Department_Cities">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_Trip" Association="JordanToursimModel.FK_Department_Trip">
+      <End Role="Trip" EntitySet="Trips" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Trip" Association="JordanToursimModel.FK_Order_Trip">
+      <End Role="Trip" EntitySet="Trips" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partners_Order" Association="JordanToursimModel.FK_Partners_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Partner" EntitySet="Partners" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cityImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsPublish" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Departments" Relationship="JordanToursimModel.FK_Department_Cities" FromRole="City" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <Property Name="departmentName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="City" Relationship="JordanToursimModel.FK_Department_Cities" FromRole="Department" ToRole="City" />
+    <NavigationProperty Name="Trip" Relationship="JordanToursimModel.FK_Department_Trip" FromRole="Department" ToRole="Trip" />
+  </EntityType>
+  <EntityType Name="LogIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Admin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Participant_ID" />
+    </Key>
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <Property Name="Participant_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParticipantName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Participant_National_ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Participant_Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Participant_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NumberList" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Participant_Phone_No" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="Participant_Image_IDcard" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Movement_way" Type="Boolean" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="isPartner" Type="Boolean" Nullable="false" />
+    <Property Name="Order_Status" Type="Boolean" />
+    <Property Name="agreement" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Trip" Relationship="JordanToursimModel.FK_Order_Trip" FromRole="Order" ToRole="Trip" />
+    <NavigationProperty Name="Partners" Relationship="JordanToursimModel.FK_Partners_Order" FromRole="Order" ToRole="Partner" />
+  </EntityType>
+  <EntityType Name="Partner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Participant_ID" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartnerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PartnerNationalNumber" Type="Int32" Nullable="false" />
+    <Property Name="PartnerBirthDay" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PartnerIdentityImg" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="JordanToursimModel.FK_Partners_Order" FromRole="Partner" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Trip">
+    <Key>
+      <PropertyRef Name="TripId" />
+    </Key>
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <Property Name="Trip_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Trip_Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Trip_Date_Time_From" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Trip_Date_Time_To" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Trip_Capacity" Type="Int32" Nullable="false" />
+    <Property Name="City_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ticket_Price" Type="Double" Nullable="false" />
+    <Property Name="Trip_Image_web" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Trip_Image_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <Property Name="BusMovement" Type="Boolean" Nullable="false" />
+    <Property Name="Lunch" Type="Boolean" Nullable="false" />
+    <Property Name="OvernightStay" Type="Boolean" Nullable="false" />
+    <Property Name="TouristGuide" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Departments" Relationship="JordanToursimModel.FK_Department_Trip" FromRole="Trip" ToRole="Department" />
+    <NavigationProperty Name="Orders" Relationship="JordanToursimModel.FK_Order_Trip" FromRole="Trip" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Department_Cities">
+    <End Type="JordanToursimModel.City" Role="City" Multiplicity="1" />
+    <End Type="JordanToursimModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_Trip">
+    <End Type="JordanToursimModel.Trip" Role="Trip" Multiplicity="1" />
+    <End Type="JordanToursimModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Trip">
+    <End Type="JordanToursimModel.Trip" Role="Trip" Multiplicity="1" />
+    <End Type="JordanToursimModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="TripId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partners_Order">
+    <End Type="JordanToursimModel.Order" Role="Order" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="JordanToursimModel.Partner" Role="Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Participant_ID" />
+      </Principal>
+      <Dependent Role="Partner">
+        <PropertyRef Name="Participant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
